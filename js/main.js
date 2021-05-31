@@ -3,9 +3,6 @@ function getRandomIntInclusive (min, max) {
   if (min < 0 || max < 0) {
     return 'введите положительное число';
   }
-  if (max < 0) {
-    return 'введите положительное число';
-  }
   if (max <= min) {
     return 'введите число больше начального';
   }
@@ -14,13 +11,10 @@ function getRandomIntInclusive (min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-getRandomIntInclusive();
+getRandomIntInclusive(0.5, 1.6);
 
 function getRandomArbitrary (min, max, numbeкDecimalPlaces) {
   if (min < 0 || max < 0) {
-    return 'введите положительное число';
-  }
-  if (max < 0) {
     return 'введите положительное число';
   }
   if (max <= min) {
@@ -29,4 +23,4 @@ function getRandomArbitrary (min, max, numbeкDecimalPlaces) {
   const randomNumber = Math.random() * (max - min + 0.1) + min;
   return  (+randomNumber.toFixed(numbeкDecimalPlaces));
 }
-getRandomArbitrary();
+getRandomArbitrary(0.5, 3.3, 2);
