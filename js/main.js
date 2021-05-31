@@ -26,7 +26,7 @@ function getRandomArbitrary (min, max, numbeкDecimalPlaces) {
   if (max <= min) {
     return 'введите число больше начального';
   }
-  const randomNumber = Math.random() * (max - min + 1) + min;
+  const randomNumber = Math.random() * (max - min + 0.1) + min;
   return  (+randomNumber.toFixed(numbeкDecimalPlaces));
 }
 getRandomArbitrary();
