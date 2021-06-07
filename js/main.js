@@ -101,4 +101,4 @@ function createAdvertisement () {
 }
 
 const similarAdvertisement = new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).map(() => createAdvertisement());
-console.log(similarAdvertisement);
+similarAdvertisement;
