@@ -80,7 +80,7 @@ const createAdvertisement = () => ({
   },
   offer: {
     title: TITLES[getRandomIntInclusive(0, TITLES.length-1)],
-    address: `location.${  locationAddressLat  }, location.${  locationAddressLng}`,
+    address: `${  locationAddressLat  }, ${  locationAddressLng}`,
     price: getRandomIntInclusive(100, 1000),
     type: getRandomArrayElement(TYPES),
     rooms: getRandomIntInclusive(1, 10),
