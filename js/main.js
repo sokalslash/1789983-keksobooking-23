@@ -71,16 +71,16 @@ const getArrayOfElement = (strings) => new Array(getRandomIntInclusive(1, string
   strings[getRandomIntInclusive(0, strings.length-1)],
 );
 
-const locationAddressLat = getRandomFloat(35.65000, 35.70000, 5);
-const locationAddressLng = getRandomFloat(139.70000, 139.80000, 5);
+function createAdvertisement () {
+  const locationAddressLat = getRandomFloat(35.65000, 35.70000, 5);
+  const locationAddressLng = getRandomFloat(139.70000, 139.80000, 5);
 
-const createAdvertisement = () => ({
-  author: {
+  const author = {
     avatar: `img/avatars/user0${  getRandomIntInclusive(1, 8)  }.png`,
-  },
-  offer: {
+  };
+  const offer = {
     title: TITLES[getRandomIntInclusive(0, TITLES.length-1)],
-    address: `${  locationAddressLat  }, ${  locationAddressLng}`,
+    address: `${locationAddressLat}, ${locationAddressLng}`,
     price: getRandomIntInclusive(100, 1000),
     type: getRandomArrayElement(TYPES),
     rooms: getRandomIntInclusive(1, 10),
@@ -90,13 +90,14 @@ const createAdvertisement = () => ({
     features: getArrayOfElement(FEATURES),
     description: getRandomArrayElement(DESCRIPTIONS),
     photos: getArrayOfElement(PHOTOS),
-  },
-  location: {
+  };
+  const location = {
     lat: locationAddressLat,
     lng: locationAddressLng,
-  },
+  };
+  return {author, offer, location};
 
-});
+}
 
 const similarAdvertisement = new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).map(() => createAdvertisement());
 similarAdvertisement;
