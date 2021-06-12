@@ -1,3 +1,5 @@
+import {getRandomIntInclusive, getRandomFloat} from './utils.js';
+
 const TITLES = [
   'Прекрасный вид из окна',
   'Есть электрокамин',
@@ -41,30 +43,6 @@ const PHOTOS = [
 
 const SIMILAR_ADVERTISEMENT_COUNT = 10;
 
-const getRandomIntInclusive = (min, max) => {
-  if (min < 0 || max < 0) {
-    return 'введите положительное число';
-  }
-  if (max <= min) {
-    return 'введите число больше начального';
-  }
-  // источник https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const getRandomFloat = (min, max, numberDecimalPlaces) => {
-  if (min < 0 || max < 0) {
-    return 'введите положительное число';
-  }
-  if (max <= min) {
-    return 'введите число больше начального';
-  }
-  const randomNumber = Math.random() * (max - min + 0.1) + min;
-  return  (+randomNumber.toFixed(numberDecimalPlaces));
-};
-
 const getRandomArrayElement = (elements) =>  elements[getRandomIntInclusive(0, elements.length - 1)];
 
 const getArrayOfElement = (strings) => new Array(getRandomIntInclusive(1, strings.length)).fill(null).map(() =>
@@ -98,6 +76,4 @@ function createAdvertisement () {
   return {author, offer, location};
 
 }
-
-const similarAdvertisement = new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).map(() => createAdvertisement());
-similarAdvertisement;
+export {SIMILAR_ADVERTISEMENT_COUNT, createAdvertisement};
