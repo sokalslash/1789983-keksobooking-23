@@ -76,4 +76,6 @@ function createAdvertisement () {
   return {author, offer, location};
 
 }
-export {SIMILAR_ADVERTISEMENT_COUNT, createAdvertisement};
+const createSimilarAds = () => new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).map(() => createAdvertisement());
+
+export {createSimilarAds};
