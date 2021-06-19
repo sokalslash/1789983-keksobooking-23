@@ -1,4 +1,4 @@
-import {createSimilarAds} from './data.js';
+
 
 const TYPE_HOUSING = {
   'palace': 'Дворец',
@@ -8,17 +8,11 @@ const TYPE_HOUSING = {
   'hotel': 'Отель',
 };
 
-const mapBlock = document.querySelector('#map-canvas');
 const similarAdsTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const similarAds = createSimilarAds();
-
-const similarListFragments = document.createDocumentFragment();
-similarListFragments;
-
-similarAds.forEach(({author, offer}) => {
+const createSimilarAd = ({author, offer}) => {
   const similarAdClone = similarAdsTemplate.cloneNode(true);
   similarAdClone.querySelector('.popup__title').textContent = offer.title;
   similarAdClone.querySelector('.popup__text--address').textContent = offer.address;
@@ -62,7 +56,6 @@ similarAds.forEach(({author, offer}) => {
   }
 
   similarAdClone.querySelector('.popup__avatar').src = author.avatar;
-
-  similarListFragments.appendChild(similarAdClone);
-});
-mapBlock.appendChild(similarListFragments.firstElementChild);
+  return similarAdClone;
+};
+export {createSimilarAd};
