@@ -1,3 +1,7 @@
-import {SIMILAR_ADVERTISEMENT_COUNT, createAdvertisement} from './data.js';
-const similarAdvertisement = new Array(SIMILAR_ADVERTISEMENT_COUNT).fill(null).map(() => createAdvertisement());
-similarAdvertisement;
+import {creatDataForAds} from './data.js';
+import {createSimilarAd} from './popup.js';
+const mapBlock = document.querySelector('#map-canvas');
+const DataForAds = creatDataForAds();
+const similarAd = createSimilarAd(DataForAds[0]);
+mapBlock.appendChild(similarAd);
+
