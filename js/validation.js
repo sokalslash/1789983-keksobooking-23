@@ -8,9 +8,11 @@ const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 
 const getMessageRequiredField = (fieldInput) => {
-  fieldInput.validity.valueMissing
-    ?fieldInput.setCustomValidity('Заполните обязательное поле')
-    :fieldInput.setCustomValidity('');
+  if (fieldInput.validity.valueMissing) {
+    fieldInput.setCustomValidity('Заполните обязательное поле');
+  } else {
+    fieldInput.setCustomValidity('');
+  }
 };
 
 const getMessageOfLengthTitle = () => {
