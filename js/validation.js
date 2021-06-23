@@ -28,9 +28,11 @@ const getMessageOfLengthTitle = () => {
 
 const getMessageOfValuePrice = () => {
   const valuePrice = priceInput.value;
-  valuePrice > MAX_VALUE_PRICE
-    ?priceInput.setCustomValidity('Вы превысили максимальное значение 1 000 000')
-    :priceInput.setCustomValidity('');
+  if (valuePrice > MAX_VALUE_PRICE) {
+    priceInput.setCustomValidity('Вы превысили максимальное значение 1 000 000');
+  } else {
+    priceInput.setCustomValidity('');
+  }
 };
 
 const getCapacity = () => {
@@ -57,6 +59,10 @@ titleInput.addEventListener('input', () => {
 
 priceInput.addEventListener('invalid', () => {
   getMessageRequiredField(priceInput);
+});
+
+priceInput.addEventListener('input', () => {
+  priceInput.reportValidity();
   getMessageOfValuePrice();
 });
 
