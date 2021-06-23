@@ -35,25 +35,23 @@ const createSimilarAd = ({author, offer}) => {
       }
     });
 
-  if (offer.description === null) {
-    similarAdClone.querySelector('.popup__description').classList.add('visually-hidden');
-  }
-  similarAdClone.querySelector('.popup__description').textContent = offer.description;
+  (offer.description === null )
+    ? similarAdClone.querySelector('.popup__description').remove()
+    : similarAdClone.querySelector('.popup__description').textContent = offer.description;
 
   const popupPhotosBlock = similarAdClone.querySelector('.popup__photos');
-  const popupPhotoRemoved = popupPhotosBlock.querySelector('.popup__photo');
-  popupPhotosBlock.removeChild(popupPhotoRemoved);
-  offer.photos.forEach(() => {
-    const imgPopupPhoto = '<img src="" class="popup__photo" width="45" height="40" alt="Фотография жилья"></img>';
-    popupPhotosBlock.insertAdjacentHTML('beforeend', imgPopupPhoto);
-  });
-  const newPhotos = popupPhotosBlock.querySelectorAll('.popup__photo');
-  for (let i = 0; i < newPhotos.length; i++) {
-    newPhotos[i].src = offer.photos[i];
-    if (newPhotos[i].src.match(null)) {
-      newPhotos[i].classList.add('visually-hidden');
+  popupPhotosBlock.innerHTML = '';
+  if (offer.photos !== (null)) {
+    offer.photos.forEach(() => {
+      const imgPopupPhoto = '<img src="" class="popup__photo" width="45" height="40" alt="Фотография жилья"></img>';
+      popupPhotosBlock.insertAdjacentHTML('beforeend', imgPopupPhoto);
+    });
+    const newPhotos = popupPhotosBlock.querySelectorAll('.popup__photo');
+    for (let i = 0; i < newPhotos.length; i++) {
+      newPhotos[i].src = offer.photos[i];
     }
   }
+
 
   similarAdClone.querySelector('.popup__avatar').src = author.avatar;
   return similarAdClone;
