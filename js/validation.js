@@ -8,9 +8,11 @@ const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 
 const getMessageRequiredField = (fieldInput) => {
-  fieldInput.validity.valueMissing
-    ?fieldInput.setCustomValidity('Заполните обязательное поле')
-    :fieldInput.setCustomValidity('');
+  if (fieldInput.validity.valueMissing) {
+    fieldInput.setCustomValidity('Заполните обязательное поле');
+  } else {
+    fieldInput.setCustomValidity('');
+  }
 };
 
 const getMessageOfLengthTitle = () => {
@@ -26,9 +28,11 @@ const getMessageOfLengthTitle = () => {
 
 const getMessageOfValuePrice = () => {
   const valuePrice = priceInput.value;
-  valuePrice > MAX_VALUE_PRICE
-    ?priceInput.setCustomValidity('Вы превысили максимальное значение 1 000 000')
-    :priceInput.setCustomValidity('');
+  if (valuePrice > MAX_VALUE_PRICE) {
+    priceInput.setCustomValidity('Вы превысили максимальное значение 1 000 000');
+  } else {
+    priceInput.setCustomValidity('');
+  }
 };
 
 const getCapacity = () => {
@@ -55,6 +59,10 @@ titleInput.addEventListener('input', () => {
 
 priceInput.addEventListener('invalid', () => {
   getMessageRequiredField(priceInput);
+});
+
+priceInput.addEventListener('input', () => {
+  priceInput.reportValidity();
   getMessageOfValuePrice();
 });
 
