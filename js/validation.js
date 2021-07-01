@@ -6,6 +6,9 @@ const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
 const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
+const typeOfHousing = document.querySelector('#type');
+const timein = document.querySelector('#timein');
+const timeout = document.querySelector('#timeout');
 
 const getMessageRequiredField = (fieldInput) => {
   if (fieldInput.validity.valueMissing) {
@@ -48,6 +51,59 @@ const getCapacity = () => {
   }
 };
 
+const changePriceInputAttributes = () => {
+  switch (typeOfHousing.value) {
+    case 'bungalow':
+      priceInput.placeholder = '0';
+      priceInput.min = '0';
+      break;
+    case 'flat':
+      priceInput.placeholder = '1000';
+      priceInput.min = '1000';
+      break;
+    case 'hotel':
+      priceInput.placeholder = '3000';
+      priceInput.min = '3000';
+      break;
+    case 'house':
+      priceInput.placeholder = '5000';
+      priceInput.min = '5000';
+      break;
+    case 'palace':
+      priceInput.placeholder = '10000';
+      priceInput.min = '10000';
+      break;
+  }
+};
+
+const changeTimeoutValue = () => {
+  switch (timein.value)  {
+    case '12:00':
+      timeout.value = '12:00';
+      break;
+    case '13:00':
+      timeout.value = '13:00';
+      break;
+    case '14:00':
+      timeout.value = '14:00';
+      break;
+  }
+};
+
+const changeTimeinValue = () => {
+  switch (timeout.value) {
+    case '12:00':
+      timein.value = '12:00';
+      break;
+    case '13:00':
+      timein.value = '13:00';
+      break;
+    case '14:00':
+      timein.value = '14:00';
+      break;
+  }
+};
+
 titleInput.addEventListener('invalid', () => {
   getMessageRequiredField(titleInput);
 });
@@ -68,4 +124,16 @@ priceInput.addEventListener('input', () => {
 
 roomNumber.addEventListener('change', () => {
   getCapacity();
+});
+
+typeOfHousing.addEventListener('change', () => {
+  changePriceInputAttributes();
+});
+
+timein.addEventListener('change', () => {
+  changeTimeoutValue();
+});
+
+timeout.addEventListener('change', () => {
+  changeTimeinValue();
 });
