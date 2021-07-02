@@ -7,8 +7,9 @@ const priceInput = document.querySelector('#price');
 const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 const typeOfHousing = document.querySelector('#type');
-const timein = document.querySelector('#timein');
-const timeout = document.querySelector('#timeout');
+const time = document.querySelector('.ad-form__element--time');
+const timein = time.querySelector('#timein');
+const timeout = time.querySelector('#timeout');
 
 const getMessageRequiredField = (fieldInput) => {
   if (fieldInput.validity.valueMissing) {
@@ -76,32 +77,9 @@ const changePriceInputAttributes = () => {
   }
 };
 
-const changeTimeoutValue = () => {
-  switch (timein.value)  {
-    case '12:00':
-      timeout.value = '12:00';
-      break;
-    case '13:00':
-      timeout.value = '13:00';
-      break;
-    case '14:00':
-      timeout.value = '14:00';
-      break;
-  }
-};
-
-const changeTimeinValue = () => {
-  switch (timeout.value) {
-    case '12:00':
-      timein.value = '12:00';
-      break;
-    case '13:00':
-      timein.value = '13:00';
-      break;
-    case '14:00':
-      timein.value = '14:00';
-      break;
-  }
+const changeTime = (elem) => {
+  timein.value = elem.target.value;
+  timeout.value = elem.target.value;
 };
 
 titleInput.addEventListener('invalid', () => {
@@ -130,10 +108,6 @@ typeOfHousing.addEventListener('change', () => {
   changePriceInputAttributes();
 });
 
-timein.addEventListener('change', () => {
-  changeTimeoutValue();
-});
-
-timeout.addEventListener('change', () => {
-  changeTimeinValue();
+time.addEventListener('change', (evt) => {
+  changeTime(evt);
 });
