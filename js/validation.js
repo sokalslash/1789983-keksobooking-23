@@ -76,12 +76,12 @@ const changePriceInputAttributes = () => {
   }
 };
 
-const changeTimein = (elem) => {
-  timein.value = elem.target.value;
+const changeTimein = (event) => {
+  timein.value = event.target.value;
 };
 
-const changeTimeout = (elem) => {
-  timeout.value = elem.target.value;
+const changeTimeout = (event) => {
+  timeout.value = event.target.value;
 };
 
 titleInput.addEventListener('invalid', () => {
