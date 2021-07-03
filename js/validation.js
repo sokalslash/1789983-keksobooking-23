@@ -7,9 +7,8 @@ const priceInput = document.querySelector('#price');
 const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 const typeOfHousing = document.querySelector('#type');
-const time = document.querySelector('.ad-form__element--time');
-const timein = time.querySelector('#timein');
-const timeout = time.querySelector('#timeout');
+const timein = document.querySelector('#timein');
+const timeout = document.querySelector('#timeout');
 
 const getMessageRequiredField = (fieldInput) => {
   if (fieldInput.validity.valueMissing) {
@@ -77,8 +76,11 @@ const changePriceInputAttributes = () => {
   }
 };
 
-const changeTime = (elem) => {
+const changeTimein = (elem) => {
   timein.value = elem.target.value;
+};
+
+const changeTimeout = (elem) => {
   timeout.value = elem.target.value;
 };
 
@@ -108,6 +110,10 @@ typeOfHousing.addEventListener('change', () => {
   changePriceInputAttributes();
 });
 
-time.addEventListener('change', (evt) => {
-  changeTime(evt);
+timein.addEventListener('change', (evt) => {
+  changeTimeout(evt);
+});
+
+timeout.addEventListener('change', (evt) => {
+  changeTimein(evt);
 });
