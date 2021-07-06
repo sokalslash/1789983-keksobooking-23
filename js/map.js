@@ -2,7 +2,7 @@ import {getDisabledForm, getActivateForm} from'./form.js';
 import {createSimilarAd} from './popup.js';
 
 const map = L.map('map-canvas');
-const maimIcon = L.icon({
+const mainIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
@@ -14,7 +14,7 @@ const markerMain = L.marker(
   },
   {
     draggable: true,
-    icon: maimIcon,
+    icon: mainIcon,
   },
 );
 const inputAddress = document.querySelector('#address');
@@ -66,4 +66,4 @@ markerMain.on('moveend', (evt) => {
   inputAddress.value = `${latLng.lat.toFixed(5)}, ${latLng.lng.toFixed(5)}`;
 });
 
-export {createMarkerAd};
+export {createMarkerAd, markerMain, map, markerAdGroup};

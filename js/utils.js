@@ -22,4 +22,6 @@ const getRandomFloat = (min, max, numberDecimalPlaces) => {
   return  (+randomNumber.toFixed(numberDecimalPlaces));
 };
 
-export {getRandomIntInclusive, getRandomFloat};
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+export {getRandomIntInclusive, getRandomFloat, isEscEvent};

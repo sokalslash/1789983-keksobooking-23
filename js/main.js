@@ -1,8 +1,6 @@
-
-import {creatDataForAds} from './data.js';
+import './map.js';
 import './validation.js';
-import {createMarkerAd} from './map.js';
+import {getAds, sendAd} from './get-send-data.js';
 
-const dataForAds = creatDataForAds();
-
-dataForAds.forEach((dataForAd) => createMarkerAd(dataForAd));
+getAds();
+sendAd();
