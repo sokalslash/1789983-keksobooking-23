@@ -20,7 +20,7 @@ const createSimilarAd = ({author, offer}) => {
   similarAdClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   similarAdClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
-  if (offer.features === undefined || offer.features. length === 0) {
+  if (offer.features === undefined || offer.features.length === 0) {
     similarAdClone.querySelector('.popup__features').classList.add('visually-hidden');
   } else {
     const featureListElement = similarAdClone.querySelector('.popup__features');
@@ -39,8 +39,10 @@ const createSimilarAd = ({author, offer}) => {
     : similarAdClone.querySelector('.popup__description').textContent = offer.description;
 
   const popupPhotosBlock = similarAdClone.querySelector('.popup__photos');
-  popupPhotosBlock.innerHTML = '';
-  if (offer.photos !== (undefined)) {
+  if (offer.photos === undefined || offer.photos.length === 0) {
+    popupPhotosBlock.classList.add('visually-hidden');
+  } else {
+    popupPhotosBlock.innerHTML = '';
     offer.photos.forEach(() => {
       const imgPopupPhoto = '<img src="" class="popup__photo" width="45" height="40" alt="Фотография жилья"></img>';
       popupPhotosBlock.insertAdjacentHTML('beforeend', imgPopupPhoto);

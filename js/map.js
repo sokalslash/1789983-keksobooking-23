@@ -1,5 +1,7 @@
 import {getDisabledForm, getActivateForm} from'./form.js';
 import {createSimilarAd} from './popup.js';
+import {getData} from './server.js';
+import {getMessageErrorGetData} from './messages.js';
 
 const map = L.map('map-canvas');
 const mainIcon = L.icon({
@@ -47,6 +49,13 @@ getDisabledForm();
 map
   .on('load', () => {
     getActivateForm();
+    getData(
+      (ads) => {
+        const arrayAds = ads.slice(0, 10);
+        arrayAds.forEach((ad) => createMarkerAd(ad));
+      },
+      getMessageErrorGetData,
+    );
   })
   .setView({
     lat: 35.652832,
