@@ -1,7 +1,7 @@
 import {getDisabledForm, getActivateForm} from'./form.js';
 import {createSimilarAd} from './popup.js';
 import {getData} from './server.js';
-import {getMessageErrorGetData} from './messages.js';
+import {getMessageError} from './messages.js';
 
 const map = L.map('map-canvas');
 const mainIcon = L.icon({
@@ -54,7 +54,7 @@ map
         const arrayAds = ads.slice(0, 10);
         arrayAds.forEach((ad) => createMarkerAd(ad));
       },
-      getMessageErrorGetData,
+      getMessageError,
     );
   })
   .setView({
@@ -75,4 +75,4 @@ markerMain.on('moveend', (evt) => {
   inputAddress.value = `${latLng.lat.toFixed(5)}, ${latLng.lng.toFixed(5)}`;
 });
 
-export {createMarkerAd, markerMain, map, markerAdGroup};
+export {markerMain, map, markerAdGroup};

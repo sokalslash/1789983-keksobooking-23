@@ -1,4 +1,4 @@
-import {getMessageSuccess, getMessageErrorSendData} from './messages.js';
+import {getMessageSuccess, getMessageError} from './messages.js';
 import {sendData} from './server.js';
 import {markerMain, map, markerAdGroup} from './map.js';
 
@@ -46,11 +46,13 @@ const getActivateForm = () => {
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   sendData(
-    getMessageSuccess,
-    getMessageErrorSendData,
+    () => {
+      getMessageSuccess();
+      clearPage();
+    },
+    getMessageError,
     new FormData(evt.target),
   );
-  clearPage();
 });
 
 export {getDisabledForm, getActivateForm};

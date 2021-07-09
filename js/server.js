@@ -10,8 +10,8 @@ const getData = (onSuccess, onFail) => {
     .then((ads) => {
       onSuccess(ads);
     })
-    .catch(() => {
-      onFail();
+    .catch((err) => {
+      onFail(`При загрузке данных с сервера произошла ошибка ${err}`);
     });
 };
 
@@ -25,13 +25,12 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        onSuccess();
       } else {
         throw new Error(`${response.status} - ${response.statusText}`);
       }
     })
-    .then(() => onSuccess())
-    .catch(() => onFail());
+    .catch((err) => onFail(`При отправке данных на сервер произошла ошибка ${err}`));
 };
 
 export {getData, sendData};
