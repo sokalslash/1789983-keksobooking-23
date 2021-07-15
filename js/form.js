@@ -27,7 +27,7 @@ buttonReset.addEventListener('click', () => {
   clearPage();
 });
 
-const getDisabledForm = () => {
+const getDisabledForms = () => {
   form.classList.add('ad-form--disabled');
   formAdElements.forEach((elem) => elem.disabled = true);
   mapFilter.classList.add('ad-form--disabled');
@@ -35,13 +35,17 @@ const getDisabledForm = () => {
   mapFilterFeature.disabled = true;
 };
 
-const getActivateForm = () => {
+const getActivateFormAd = () => {
   form.classList.remove('ad-form--disabled');
   formAdElements.forEach((elem) => elem.disabled = false);
+};
+
+const getActivateMapFilter = () => {
   mapFilter.classList.remove('ad-form--disabled');
   mapFilterElements.forEach((elem) => elem.disabled = false);
   mapFilterFeature.disabled = false;
 };
+
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -55,4 +59,29 @@ form.addEventListener('submit', (evt) => {
   );
 });
 
-export {getDisabledForm, getActivateForm};
+// const setMapFormFilterClick = (ads) => {
+//   mapFilter.addEventListener('change', (evt) => {
+//     const filteredArray = ads.filter((ad) => {
+//       if (ad.offer.type === evt.target.value) {
+//         console.log(ads);
+//         console.log(ad);
+//         console.log(evt);
+//         console.log(evt.target.value);
+//         return true;
+//       }
+//     });
+//     console.log(filteredArray);
+//     const filteredArraySimilar = filteredArray.slice(0, 10);
+//     console.log(filteredArraySimilar);
+//     return filteredArraySimilar;
+//   });
+// };
+
+const setMapFormFilterClick = (getFilteredArray) => {
+  mapFilter.addEventListener('change', (ads) => {
+    getFilteredArray(ads);
+
+  });
+};
+
+export {getDisabledForms, getActivateFormAd, getActivateMapFilter, setMapFormFilterClick};

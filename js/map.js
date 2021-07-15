@@ -1,7 +1,9 @@
-import {getDisabledForm, getActivateForm} from'./form.js';
+import {getDisabledForms, getActivateFormAd, getActivateMapFilter, setMapFormFilterClick} from'./form.js';
 import {createSimilarAd} from './popup.js';
 import {getData} from './server.js';
 import {getMessageError} from './messages.js';
+import {getFilteredArrayAds} from './filters.js';
+import {debounce} from './utils.js';
 
 const map = L.map('map-canvas');
 const mainIcon = L.icon({
@@ -44,17 +46,25 @@ const createMarkerAd = (dataForAd) => {
   markerAd.bindPopup(createSimilarAd(dataForAd));
 };
 
-getDisabledForm();
+getDisabledForms();
 
 map
   .on('load', () => {
-    getActivateForm();
-    getData(
-      (ads) => {
-        const arrayAds = ads.slice(0, 10);
-        arrayAds.forEach((ad) => createMarkerAd(ad));
-      },
-      getMessageError,
+    getActivateFormAd();
+    getData((ads) => {
+      ads
+        .slice(0, 10)
+        .forEach((ad) =>createMarkerAd(ad));
+      getActivateMapFilter();
+      setMapFormFilterClick(debounce(() => {
+        const arraySimilar = getFilteredArrayAds(ads);
+        markerAdGroup.clearLayers();
+        arraySimilar
+          .slice(0, 10)
+          .forEach((ad) => createMarkerAd(ad));
+      }));
+    },
+    getMessageError,
     );
   })
   .setView({
