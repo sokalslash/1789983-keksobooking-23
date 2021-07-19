@@ -2,7 +2,7 @@ import {getDisabledForms, getActivateFormAd, getActivateMapFilter, setMapFormFil
 import {createSimilarAd} from './popup.js';
 import {getData} from './server.js';
 import {getMessageError} from './messages.js';
-import {getFilteredArrayAds} from './filters.js';
+import {getFilteredAds} from './filter.js';
 import {debounce} from './utils.js';
 
 const map = L.map('map-canvas');
@@ -57,7 +57,7 @@ map
         .forEach((ad) =>createMarkerAd(ad));
       getActivateMapFilter();
       setMapFormFilterClick(debounce(() => {
-        const arraySimilar = getFilteredArrayAds(ads);
+        const arraySimilar = getFilteredAds(ads);
         markerAdGroup.clearLayers();
         arraySimilar
           .slice(0, 10)
