@@ -1,9 +1,3 @@
-const codeForPriceHousing = {
-  middle: 'ad.offer.price >= 10000 && ad.offer.price  < 50000',
-  low: 'ad.offer.price < 10000',
-  high: 'ad.offer.price >= 50000',
-};
-
 const mapFilterHousingType = document.querySelector('#housing-type');
 const mapFilterHousingPrice = document.querySelector('#housing-price');
 const mapFilterHousingRooms = document.querySelector('#housing-rooms');
