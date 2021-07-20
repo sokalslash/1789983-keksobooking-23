@@ -27,7 +27,7 @@ buttonReset.addEventListener('click', () => {
   clearPage();
 });
 
-const getDisabledForm = () => {
+const getDisabledForms = () => {
   form.classList.add('ad-form--disabled');
   formAdElements.forEach((elem) => elem.disabled = true);
   mapFilter.classList.add('ad-form--disabled');
@@ -35,9 +35,12 @@ const getDisabledForm = () => {
   mapFilterFeature.disabled = true;
 };
 
-const getActivateForm = () => {
+const getActivateFormAd = () => {
   form.classList.remove('ad-form--disabled');
   formAdElements.forEach((elem) => elem.disabled = false);
+};
+
+const getActivateMapFilter = () => {
   mapFilter.classList.remove('ad-form--disabled');
   mapFilterElements.forEach((elem) => elem.disabled = false);
   mapFilterFeature.disabled = false;
@@ -55,4 +58,11 @@ form.addEventListener('submit', (evt) => {
   );
 });
 
-export {getDisabledForm, getActivateForm};
+const setMapFormFilterClick = (getFilteredArray) => {
+  mapFilter.addEventListener('change', (ads) => {
+    getFilteredArray(ads);
+
+  });
+};
+
+export {getDisabledForms, getActivateFormAd, getActivateMapFilter, setMapFormFilterClick};
