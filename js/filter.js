@@ -20,7 +20,15 @@ const getFilteredAds = (ads) => {
   };
   const isPriceHousing = (ad) => {
     if (mapFilterHousingPrice.value !== 'any') {
-      return eval(codeForPriceHousing[mapFilterHousingPrice.value]);
+      if (mapFilterHousingPrice.value === 'middle') {
+        return ad.offer.price >= 10000 && ad.offer.price  < 50000;
+      }
+      if (mapFilterHousingPrice.value === 'low') {
+        return ad.offer.price < 10000;
+      }
+      if (mapFilterHousingPrice.value === 'high') {
+        return ad.offer.price >= 50000;
+      }
     } else if (mapFilterHousingPrice.value === 'any') {
       return ad.offer.price !== 'any';
     }
