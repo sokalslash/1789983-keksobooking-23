@@ -46,7 +46,6 @@ const getActivateMapFilter = () => {
   mapFilterFeature.disabled = false;
 };
 
-
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   sendData(
@@ -58,24 +57,6 @@ form.addEventListener('submit', (evt) => {
     new FormData(evt.target),
   );
 });
-
-// const setMapFormFilterClick = (ads) => {
-//   mapFilter.addEventListener('change', (evt) => {
-//     const filteredArray = ads.filter((ad) => {
-//       if (ad.offer.type === evt.target.value) {
-//         console.log(ads);
-//         console.log(ad);
-//         console.log(evt);
-//         console.log(evt.target.value);
-//         return true;
-//       }
-//     });
-//     console.log(filteredArray);
-//     const filteredArraySimilar = filteredArray.slice(0, 10);
-//     console.log(filteredArraySimilar);
-//     return filteredArraySimilar;
-//   });
-// };
 
 const setMapFormFilterClick = (getFilteredArray) => {
   mapFilter.addEventListener('change', (ads) => {

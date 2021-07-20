@@ -8,8 +8,8 @@ const getFilteredAds = (ads) => {
   const isTypeHousing = (ad) => {
     if (mapFilterHousingType.value !== 'any') {
       return ad.offer.type === mapFilterHousingType.value;
-    } else if (mapFilterHousingType.value === 'any') {
-      return ad.offer.type !== 'any';
+    } else {
+      return true;
     }
   };
   const isPriceHousing = (ad) => {
@@ -23,22 +23,22 @@ const getFilteredAds = (ads) => {
       if (mapFilterHousingPrice.value === 'high') {
         return ad.offer.price >= 50000;
       }
-    } else if (mapFilterHousingPrice.value === 'any') {
-      return ad.offer.price !== 'any';
+    } else {
+      return true;
     }
   };
   const isRoomsHousing = (ad) => {
     if (mapFilterHousingRooms.value !== 'any') {
       return ad.offer.rooms === +mapFilterHousingRooms.value;
-    } else if (mapFilterHousingRooms.value === 'any') {
-      return ad.offer.rooms !== 'any';
+    } else {
+      return true;
     }
   };
   const isGuestsHousing = (ad) => {
     if (mapFilterHousingGuests.value !== 'any') {
       return ad.offer.guests === +mapFilterHousingGuests.value;
-    } else if (mapFilterHousingGuests.value === 'any') {
-      return ad.offer.guests !== 'any';
+    } else {
+      return true;
     }
   };
   const isCheckbox = (ad) => {
