@@ -3,8 +3,10 @@ import {createSimilarAd} from './popup.js';
 import {getData} from './server.js';
 import {getMessageError} from './messages.js';
 import {getFilteredAds} from './filter.js';
-import {debounce} from './utils.js';
+import {getDebounce} from './utils.js';
 
+const COORDINATES_OF_TOKYO_LAT = 35.652832;
+const COORDINATES_OF_TOKYO_LNG = 139.839478;
 const map = L.map('map-canvas');
 const mainIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
@@ -13,8 +15,8 @@ const mainIcon = L.icon({
 });
 const markerMain = L.marker(
   {
-    lat: 35.652832,
-    lng: 139.839478,
+    lat: COORDINATES_OF_TOKYO_LAT,
+    lng: COORDINATES_OF_TOKYO_LNG,
   },
   {
     draggable: true,
@@ -23,8 +25,8 @@ const markerMain = L.marker(
 );
 const inputAddress = document.querySelector('#address');
 const markerAdGroup = L.layerGroup().addTo(map);
-const createMarkerAd = (dataForAd) => {
-  const {location} = dataForAd;
+const createMarkerAd = (adData) => {
+  const {location} = adData;
   const iconAd = L.icon({
     iconUrl: 'img/pin.svg',
     iconSize: [40, 40],
@@ -43,7 +45,7 @@ const createMarkerAd = (dataForAd) => {
     },
   );
   markerAd.addTo(markerAdGroup);
-  markerAd.bindPopup(createSimilarAd(dataForAd));
+  markerAd.bindPopup(createSimilarAd(adData));
 };
 
 getDisabledForms();
@@ -56,10 +58,10 @@ map
         .slice(0, 10)
         .forEach((ad) =>createMarkerAd(ad));
       getActivateMapFilter();
-      setMapFormFilterClick(debounce(() => {
-        const arraySimilar = getFilteredAds(ads);
+      setMapFormFilterClick(getDebounce(() => {
+        const arraySimilarAds = getFilteredAds(ads);
         markerAdGroup.clearLayers();
-        arraySimilar
+        arraySimilarAds
           .slice(0, 10)
           .forEach((ad) => createMarkerAd(ad));
       }));
@@ -68,8 +70,8 @@ map
     );
   })
   .setView({
-    lat: 35.652832,
-    lng: 139.839478,
+    lat: COORDINATES_OF_TOKYO_LAT,
+    lng: COORDINATES_OF_TOKYO_LNG,
   }, 10);
 
 L.tileLayer(

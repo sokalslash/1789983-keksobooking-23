@@ -2,17 +2,17 @@ const mapFilterHousingType = document.querySelector('#housing-type');
 const mapFilterHousingPrice = document.querySelector('#housing-price');
 const mapFilterHousingRooms = document.querySelector('#housing-rooms');
 const mapFilterHousingGuests = document.querySelector('#housing-guests');
-const checkboxsFeatures = document.querySelectorAll('.map__checkbox');
+const mapFilterCheckboxsFeatures = document.querySelectorAll('.map__checkbox');
 
 const getFilteredAds = (ads) => {
-  const isTypeHousing = (ad) => {
+  const checkTypeHousing = (ad) => {
     if (mapFilterHousingType.value !== 'any') {
       return ad.offer.type === mapFilterHousingType.value;
     } else {
       return true;
     }
   };
-  const isPriceHousing = (ad) => {
+  const checkPriceHousing = (ad) => {
     if (mapFilterHousingPrice.value !== 'any') {
       if (mapFilterHousingPrice.value === 'middle') {
         return ad.offer.price >= 10000 && ad.offer.price  < 50000;
@@ -27,25 +27,25 @@ const getFilteredAds = (ads) => {
       return true;
     }
   };
-  const isRoomsHousing = (ad) => {
+  const checkRoomsHousing = (ad) => {
     if (mapFilterHousingRooms.value !== 'any') {
       return ad.offer.rooms === +mapFilterHousingRooms.value;
     } else {
       return true;
     }
   };
-  const isGuestsHousing = (ad) => {
+  const checkGuestsHousing = (ad) => {
     if (mapFilterHousingGuests.value !== 'any') {
       return ad.offer.guests === +mapFilterHousingGuests.value;
     } else {
       return true;
     }
   };
-  const isCheckbox = (ad) => {
+  const checkCheckbox = (ad) => {
     const checkboxsChecked =[];
-    for (let i = 0; i < checkboxsFeatures.length; i++) {
-      if (checkboxsFeatures[i].checked) {
-        checkboxsChecked.push(checkboxsFeatures[i].value);
+    for (let i = 0; i < mapFilterCheckboxsFeatures.length; i++) {
+      if (mapFilterCheckboxsFeatures[i].checked) {
+        checkboxsChecked.push(mapFilterCheckboxsFeatures[i].value);
       }
     }
     if (ad.offer.features !== undefined){
@@ -54,7 +54,7 @@ const getFilteredAds = (ads) => {
   };
 
   const getDataForFilter = (ad) => {
-    if (isTypeHousing(ad) && isPriceHousing(ad) && isRoomsHousing(ad) && isGuestsHousing(ad) && isCheckbox(ad)) {
+    if (checkTypeHousing(ad) && checkPriceHousing(ad) && checkRoomsHousing(ad) && checkGuestsHousing(ad) && checkCheckbox(ad)) {
       return true;
     }
   };
