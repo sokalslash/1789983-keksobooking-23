@@ -4,11 +4,11 @@ const MAX_VALUE_PRICE = 1000000;
 
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
-const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
-const typeOfHousing = document.querySelector('#type');
-const timein = document.querySelector('#timein');
-const timeout = document.querySelector('#timeout');
+const roomNumberSelect = document.querySelector('#room_number');
+const capacitySelect = document.querySelector('#capacity');
+const typeSelect = document.querySelector('#type');
+const timeinSelect = document.querySelector('#timein');
+const timeoutSelect = document.querySelector('#timeout');
 
 const getMessageRequiredField = (fieldInput) => {
   if (fieldInput.validity.valueMissing) {
@@ -39,20 +39,20 @@ const getMessageOfValuePrice = () => {
 };
 
 const getCapacity = () => {
-  switch (roomNumber.value) {
+  switch (roomNumberSelect.value) {
     case '1':
-      return capacity.innerHTML = '<option value="1">для 1 гостя</option>';
+      return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option>';
     case '2':
-      return capacity.innerHTML = '<option value="1">для 1 гостя</option> <option value="2">для 2 гостей</option> ';
+      return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option> <option value="2">для 2 гостей</option> ';
     case '3':
-      return capacity.innerHTML = '<option value="1">для 1 гостя</option> <option value="2">для 2 гостей</option> <option value="3" selected>для 3 гостей</option>';
+      return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option> <option value="2">для 2 гостей</option> <option value="3" selected>для 3 гостей</option>';
     case '100':
-      return capacity.innerHTML = '<option value="0">не для гостей</option>';
+      return capacitySelect.innerHTML = '<option value="0">не для гостей</option>';
   }
 };
 
 const changePriceInputAttributes = () => {
-  switch (typeOfHousing.value) {
+  switch (typeSelect.value) {
     case 'bungalow':
       priceInput.placeholder = '0';
       priceInput.min = '0';
@@ -77,11 +77,11 @@ const changePriceInputAttributes = () => {
 };
 
 const changeTimein = (event) => {
-  timein.value = event.target.value;
+  timeinSelect.value = event.target.value;
 };
 
 const changeTimeout = (event) => {
-  timeout.value = event.target.value;
+  timeoutSelect.value = event.target.value;
 };
 
 titleInput.addEventListener('invalid', () => {
@@ -102,18 +102,18 @@ priceInput.addEventListener('input', () => {
   getMessageOfValuePrice();
 });
 
-roomNumber.addEventListener('change', () => {
+roomNumberSelect.addEventListener('change', () => {
   getCapacity();
 });
 
-typeOfHousing.addEventListener('change', () => {
+typeSelect.addEventListener('change', () => {
   changePriceInputAttributes();
 });
 
-timein.addEventListener('change', (evt) => {
+timeinSelect.addEventListener('change', (evt) => {
   changeTimeout(evt);
 });
 
-timeout.addEventListener('change', (evt) => {
+timeoutSelect.addEventListener('change', (evt) => {
   changeTimein(evt);
 });
