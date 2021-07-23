@@ -1,10 +1,12 @@
 import {getMessageSuccess, getMessageError} from './messages.js';
 import {sendData} from './server.js';
 import {markerMain, map, markerAdGroup} from './map.js';
+import {COORDINATES_OF_TOKYO_LAT, COORDINATES_OF_TOKYO_LNG, ZOOM_MAP} from './utils.js';
 
-const COORDINATES_OF_TOKYO_LAT = 35.652832;
-const COORDINATES_OF_TOKYO_LNG = 139.839478;
+const PRICE_VALUE = '0';
 const formAd = document.querySelector('.ad-form');
+const inputPriceFormAd = formAd.querySelector('#price');
+const inputCapacitySelectFormAd = formAd.querySelector('#capacity');
 const formAdFields = formAd.querySelectorAll('fieldset');
 const mapFilter = document.querySelector('.map__filters');
 const mapFilterFields = mapFilter.querySelectorAll('.map__filter');
@@ -13,6 +15,9 @@ const buttonReset = formAd.querySelector('.ad-form__reset');
 
 const clearPage = () => {
   formAd.reset();
+  inputPriceFormAd.placeholder = PRICE_VALUE;
+  inputPriceFormAd.min = PRICE_VALUE;
+  inputCapacitySelectFormAd.innerHTML = '<option value="1">для 1 гостя</option>';
   mapFilter.reset();
   markerMain.setLatLng({
     lat: COORDINATES_OF_TOKYO_LAT,
@@ -21,7 +26,7 @@ const clearPage = () => {
   map.setView({
     lat: COORDINATES_OF_TOKYO_LAT,
     lng: COORDINATES_OF_TOKYO_LNG,
-  }, 10);
+  }, ZOOM_MAP);
   markerAdGroup.clearLayers();
 };
 
@@ -32,7 +37,7 @@ buttonReset.addEventListener('click', () => {
 const getDisabledForms = () => {
   formAd.classList.add('ad-form--disabled');
   formAdFields.forEach((elem) => elem.disabled = true);
-  mapFilter.classList.add('ad-form--disabled');
+  mapFilter.classList.add('map__filters--disabled');
   mapFilterFields.forEach((elem) => elem.disabled = true);
   mapFilterFeature.disabled = true;
 };
@@ -43,7 +48,7 @@ const getActivateFormAd = () => {
 };
 
 const getActivateMapFilter = () => {
-  mapFilter.classList.remove('ad-form--disabled');
+  mapFilter.classList.remove('map__filters--disabled');
   mapFilterFields.forEach((elem) => elem.disabled = false);
   mapFilterFeature.disabled = false;
 };

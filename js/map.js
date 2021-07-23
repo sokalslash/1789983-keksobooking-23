@@ -3,15 +3,24 @@ import {createSimilarAd} from './popup.js';
 import {getData} from './server.js';
 import {getMessageError} from './messages.js';
 import {getFilteredAds} from './filter.js';
-import {getDebounce} from './utils.js';
+import {getDebounce, COORDINATES_OF_TOKYO_LAT, COORDINATES_OF_TOKYO_LNG, ZOOM_MAP} from './utils.js';
 
-const COORDINATES_OF_TOKYO_LAT = 35.652832;
-const COORDINATES_OF_TOKYO_LNG = 139.839478;
+const MARKER_COUNT = 10;
+const DECIMAL_PLACES = 5;
+const MAIN_ICON_SIZE_HEIGHT = 52;
+const MAIN_ICON_SIZE_WIDHT = 52;
+const MAIN_ICON_ANCHOR_HEIGHT = 52;
+const MAIN_ICON_ANCHOR_WIDHT = 26;
+const AD_ICON_SIZE_HEIGHT = 40;
+const AD_ICON_SIZE_WIDH = 40;
+const AD_ICON_ANCHOR_HEIGHT = 40;
+const AD_ICON_ANCHOR_WIDHT = 20;
+
 const map = L.map('map-canvas');
 const mainIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [MAIN_ICON_SIZE_HEIGHT, MAIN_ICON_SIZE_WIDHT],
+  iconAnchor: [MAIN_ICON_ANCHOR_WIDHT, MAIN_ICON_ANCHOR_HEIGHT],
 });
 const markerMain = L.marker(
   {
@@ -29,8 +38,8 @@ const createMarkerAd = (adData) => {
   const {location} = adData;
   const iconAd = L.icon({
     iconUrl: 'img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [AD_ICON_SIZE_HEIGHT, AD_ICON_SIZE_WIDH],
+    iconAnchor: [AD_ICON_ANCHOR_WIDHT, AD_ICON_ANCHOR_HEIGHT],
   });
   const markerAd = L.marker(
     {
@@ -55,14 +64,14 @@ map
     getActivateFormAd();
     getData((ads) => {
       ads
-        .slice(0, 10)
-        .forEach((ad) =>createMarkerAd(ad));
+        .slice(0, MARKER_COUNT)
+        .forEach((ad) => createMarkerAd(ad));
       getActivateMapFilter();
       setMapFormFilterClick(getDebounce(() => {
         const arraySimilarAds = getFilteredAds(ads);
         markerAdGroup.clearLayers();
         arraySimilarAds
-          .slice(0, 10)
+          .slice(0, MARKER_COUNT)
           .forEach((ad) => createMarkerAd(ad));
       }));
     },
@@ -72,7 +81,7 @@ map
   .setView({
     lat: COORDINATES_OF_TOKYO_LAT,
     lng: COORDINATES_OF_TOKYO_LNG,
-  }, 10);
+  }, ZOOM_MAP);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -84,7 +93,7 @@ L.tileLayer(
 markerMain.addTo(map);
 markerMain.on('moveend', (evt) => {
   const latLng = evt.target.getLatLng();
-  inputAddress.value = `${latLng.lat.toFixed(5)}, ${latLng.lng.toFixed(5)}`;
+  inputAddress.value = `${latLng.lat.toFixed(DECIMAL_PLACES)}, ${latLng.lng.toFixed(DECIMAL_PLACES)}`;
 });
 
 export {markerMain, map, markerAdGroup};

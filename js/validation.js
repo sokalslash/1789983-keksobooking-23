@@ -1,6 +1,26 @@
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_VALUE_PRICE = 1000000;
+const NumberOfRoomsHousing = {
+  ONE_ROOM: '1',
+  TWO_ROOMS: '2',
+  THREE_ROOMS: '3',
+  ONE_HUNDRED_ROOMS: '100',
+};
+const TypeOfHousing = {
+  BUNGALOW: 'bungalow',
+  FLAT: 'flat',
+  HOUTEL: 'hotel',
+  HOUSE: 'house',
+  PALASE: 'palace',
+};
+const priceForTypeHousing = {
+  bungalow: '0',
+  flat: '1000',
+  hotel: '3000',
+  house: '5000',
+  palace: '10000',
+};
 
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
@@ -40,38 +60,38 @@ const getMessageOfValuePrice = () => {
 
 const getCapacity = () => {
   switch (roomNumberSelect.value) {
-    case '1':
+    case NumberOfRoomsHousing.ONE_ROOM:
       return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option>';
-    case '2':
+    case NumberOfRoomsHousing.TWO_ROOMS:
       return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option> <option value="2">для 2 гостей</option> ';
-    case '3':
+    case NumberOfRoomsHousing.THREE_ROOMS:
       return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option> <option value="2">для 2 гостей</option> <option value="3" selected>для 3 гостей</option>';
-    case '100':
+    case NumberOfRoomsHousing.ONE_HUNDRED_ROOMS:
       return capacitySelect.innerHTML = '<option value="0">не для гостей</option>';
   }
 };
 
 const changePriceInputAttributes = () => {
   switch (typeSelect.value) {
-    case 'bungalow':
-      priceInput.placeholder = '0';
-      priceInput.min = '0';
+    case TypeOfHousing.BUNGALOW:
+      priceInput.placeholder = priceForTypeHousing.bungalow;
+      priceInput.min = priceForTypeHousing.bungalow;
       break;
-    case 'flat':
-      priceInput.placeholder = '1000';
-      priceInput.min = '1000';
+    case TypeOfHousing.FLAT:
+      priceInput.placeholder = priceForTypeHousing.flat;
+      priceInput.min = priceForTypeHousing.flat;
       break;
-    case 'hotel':
-      priceInput.placeholder = '3000';
-      priceInput.min = '3000';
+    case TypeOfHousing.HOUTEL:
+      priceInput.placeholder = priceForTypeHousing.hotel;
+      priceInput.min = priceForTypeHousing.hotel;
       break;
-    case 'house':
-      priceInput.placeholder = '5000';
-      priceInput.min = '5000';
+    case TypeOfHousing.HOUSE:
+      priceInput.placeholder = priceForTypeHousing.house;
+      priceInput.min = priceForTypeHousing.house;
       break;
-    case 'palace':
-      priceInput.placeholder = '10000';
-      priceInput.min = '10000';
+    case TypeOfHousing.PALASE:
+      priceInput.placeholder = priceForTypeHousing.palace;
+      priceInput.min =  priceForTypeHousing.palace;
       break;
   }
 };
