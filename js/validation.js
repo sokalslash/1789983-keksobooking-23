@@ -13,7 +13,7 @@ const NumberOfGuests = {
   TWO_GUESTS: '2',
   THREE_GUESTS: '3',
   NOT_FOR_GUESTS: '0',
-}
+};
 const TypeOfHousing = {
   BUNGALOW: 'bungalow',
   FLAT: 'flat',
@@ -65,7 +65,7 @@ const getMessageOfValuePrice = () => {
   }
 };
 
-const getCapacity = () => {
+const changeCapacity = () => {
   switch (roomNumberSelect.value) {
     case NumberOfRoomsHousing.ONE_ROOM:
       return capacitySelect.innerHTML = '<option value="1">для 1 гостя</option>';
@@ -143,7 +143,7 @@ priceInput.addEventListener('input', () => {
 });
 
 roomNumberSelect.addEventListener('change', () => {
-  getCapacity();
+  changeCapacity();
 });
 
 capacitySelect.addEventListener('change', getNumberOfRooms);
