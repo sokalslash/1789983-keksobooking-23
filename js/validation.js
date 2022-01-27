@@ -124,33 +124,25 @@ const changeTimeout = (event) => {
   timeoutSelect.value = event.target.value;
 };
 
-titleInput.addEventListener('invalid', () => {
-  getMessageRequiredField(titleInput);
-});
+titleInput.addEventListener('invalid', () => getMessageRequiredField(titleInput));
 
 titleInput.addEventListener('input', () => {
   titleInput.reportValidity();
   getMessageOfLengthTitle();
 });
 
-priceInput.addEventListener('invalid', () => {
-  getMessageRequiredField(priceInput);
-});
+priceInput.addEventListener('invalid', () => getMessageRequiredField(priceInput));
 
 priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
   getMessageOfValuePrice();
 });
 
-roomNumberSelect.addEventListener('change', () => {
-  changeCapacity();
-});
+roomNumberSelect.addEventListener('change', changeCapacity);
 
 capacitySelect.addEventListener('change', getNumberOfRooms);
 
-typeSelect.addEventListener('change', () => {
-  changePriceInputAttributes();
-});
+typeSelect.addEventListener('change', changePriceInputAttributes);
 
 timeinSelect.addEventListener('change', (evt) => {
   changeTimeout(evt);
