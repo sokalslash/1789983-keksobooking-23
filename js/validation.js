@@ -8,12 +8,6 @@ const NumberOfRoomsHousing = {
   THREE_ROOMS: '3',
   ONE_HUNDRED_ROOMS: '100',
 };
-const NumberOfGuests = {
-  ONE_GUEST: '1',
-  TWO_GUESTS: '2',
-  THREE_GUESTS: '3',
-  NOT_FOR_GUESTS: '0',
-};
 const TypeOfHousing = {
   BUNGALOW: 'bungalow',
   FLAT: 'flat',
@@ -78,19 +72,6 @@ const changeCapacity = () => {
   }
 };
 
-const getNumberOfRooms = () => {
-  switch (capacitySelect.value) {
-    case NumberOfGuests.ONE_GUEST:
-      return roomNumberSelect.innerHTML = '<option value="1">1 комната</option> <option value="2">2 комнаты</option> <option value="3">3 комнаты</option>';
-    case NumberOfGuests.TWO_GUESTS:
-      return roomNumberSelect.innerHTML = '<option value="2">2 комнаты</option> <option value="3">3 комнаты</option>';
-    case NumberOfGuests.THREE_GUESTS:
-      return roomNumberSelect.innerHTML = '<option value="3">3 комнаты</option>';
-    case NumberOfGuests.NOT_FOR_GUESTS:
-      return roomNumberSelect.innerHTML = '<option value="100">100 комнат</option>';
-  }
-};
-
 const changePriceInputAttributes = () => {
   switch (typeSelect.value) {
     case TypeOfHousing.BUNGALOW:
@@ -124,6 +105,8 @@ const changeTimeout = (event) => {
   timeoutSelect.value = event.target.value;
 };
 
+changeCapacity();
+
 titleInput.addEventListener('invalid', () => getMessageRequiredField(titleInput));
 
 titleInput.addEventListener('input', () => {
@@ -139,8 +122,6 @@ priceInput.addEventListener('input', () => {
 });
 
 roomNumberSelect.addEventListener('change', changeCapacity);
-
-capacitySelect.addEventListener('change', getNumberOfRooms);
 
 typeSelect.addEventListener('change', changePriceInputAttributes);
 
